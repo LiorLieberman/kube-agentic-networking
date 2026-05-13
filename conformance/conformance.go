@@ -185,17 +185,19 @@ func RunConformanceWithOptions(t *testing.T, opts confsuite.ConformanceOptions) 
 func getKubeAgenticNetworkingVersion(crds []apiextensionsv1.CustomResourceDefinition) (string, error) {
 	var bundleVersion string
 	for _, crd := range crds {
-		v, okv := crd.Annotations[version.BundleVersionAnnotation]
-		if !okv {
+		// Only scan the xaccesspolicies CRD to extract the bundle version, allowing xbackends to remain unannotated.
+		if crd.Name != "xaccesspolicies.agentic.networking.x-k8s.io" {
 			continue
 		}
-		if bundleVersion != "" && v != bundleVersion {
-			return "", errors.New("multiple kube-agentic-networking CRDs versions detected")
+		v, okv := crd.Annotations[version.BundleVersionAnnotation]
+		if !okv {
+			return "", errors.New("xaccesspolicies CRD found but missing the bundle version annotation")
 		}
 		bundleVersion = v
+		break
 	}
 	if bundleVersion == "" {
-		return "", errors.New("no kube-agentic-networking CRDs with the proper annotations found in the cluster")
+		return "", errors.New("xaccesspolicies CRD not found in the cluster")
 	}
 	return bundleVersion, nil
 }
