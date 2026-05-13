@@ -78,6 +78,7 @@ type BackendStatus struct {
 // +genclient
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:metadata:annotations="agentic.networking.x-k8s.io/bundle-version=v1alpha1"
 
 // XBackend is the Schema for the backends API.
 type XBackend struct {
