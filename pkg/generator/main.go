@@ -21,6 +21,7 @@ import (
 	"os"
 	"path/filepath"
 
+	v1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"sigs.k8s.io/controller-tools/pkg/crd"
 	"sigs.k8s.io/controller-tools/pkg/loader"
@@ -83,11 +84,12 @@ func main() {
 			obj.Annotations["agentic.networking.x-k8s.io/bundle-version"] = version.BundleVersion
 		}
 
-		// Clean up metadata properties from schema
+		// Clean up metadata properties from schema and fix date-time fields
 		for i := range obj.Spec.Versions {
 			v := &obj.Spec.Versions[i]
 			if v.Schema != nil && v.Schema.OpenAPIV3Schema != nil {
 				delete(v.Schema.OpenAPIV3Schema.Properties, "metadata")
+				fixDateTime(v.Schema.OpenAPIV3Schema)
 			}
 		}
 
@@ -107,5 +109,28 @@ func main() {
 			os.Exit(1)
 		}
 		fmt.Printf("Generated %s\n", filePath)
+	}
+}
+
+func fixDateTime(schema *v1.JSONSchemaProps) {
+	if schema == nil {
+		return
+	}
+	if schema.Format == "date-time" {
+		// TODO(liorlieberman): Figure out why crdgen switched this to "object"
+		schema.Type = "string"
+	}
+	for k, v := range schema.Properties {
+		fixDateTime(&v)
+		schema.Properties[k] = v
+	}
+	if schema.Items != nil {
+		if schema.Items.Schema != nil {
+			fixDateTime(schema.Items.Schema)
+		}
+		for i, v := range schema.Items.JSONSchemas {
+			fixDateTime(&v)
+			schema.Items.JSONSchemas[i] = v
+		}
 	}
 }
