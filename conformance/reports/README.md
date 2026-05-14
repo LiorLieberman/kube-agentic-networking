@@ -4,15 +4,15 @@ This directory stores conformance reports submitted by various implementations o
 
 ## How this folder is structured
 
-This folder stores conformance reports organized first by the version of the Kube Agentic Networking specification they were tested against, and then by the specific conformance profile (e.g., GatewayLayer):
+This folder stores conformance reports organized first by the version of the Kube Agentic Networking specification they were tested against, and then by the specific conformance profile (e.g., Gateway):
 
 ```
 |-- conformance/reports
 |   |-- v0.0.0-dev  # Specification bundle version
-|   |   |-- gatewaylayer  # Conformance profile category
+|   |   |-- gateway  # Conformance profile category
 |   |   |   |-- my-agentic-gateway
 |   |   |   |   |-- README.md
-|   |   |   |   |-- v1.2.3-default-gatewaylayer-report.yaml # Example report file
+|   |   |   |   |-- v1.2.3-default-gateway-report.yaml # Example report file
 |   |   |   |-- another-implementation
 |   |   |   |   |-- README.md
 |   |   |   |   |-- ...
@@ -20,7 +20,7 @@ This folder stores conformance reports organized first by the version of the Kub
 
 ## Implementation Submissions
 
-Each implementation conformant with a specific profile of a specific version of Kube Agentic Networking should have its own folder within the corresponding version and profile directory (e.g., `/conformance/reports/v0.0.0-dev/gatewaylayer/my-implementation/`).
+Each implementation conformant with a specific profile of a specific version of Kube Agentic Networking should have its own folder within the corresponding version and profile directory (e.g., `/conformance/reports/v0.0.0-dev/gateway/my-implementation/`).
 
 The implementation is the owner of its folder and is responsible for:
 
@@ -28,7 +28,7 @@ The implementation is the owner of its folder and is responsible for:
 2. Maintaining a mandatory `README.md` file within their folder, structured as follows:
 
 ```markdown
-# My Agentic Gateway Implementation (GatewayLayer Profile Conformance)
+# My Agentic Gateway Implementation (Gateway Profile Conformance)
 
 General information about the My/Implementation project.
 
@@ -36,7 +36,7 @@ General information about the My/Implementation project.
 
 | Extension Version Tested | Profile Tested | Implementation Version | Mode    | Report                                                                     |
 |--------------------------|----------------|------------------------|---------|----------------------------------------------------------------------------|
-| v0.0.0-dev               | GatewayLayer   | v1.2.3                 | default | [v1.2.3 GatewayLayer report](./v1.2.3-default-gatewaylayer-report.yaml)    |
+| v0.0.0-dev               | Gateway   | v1.2.3                 | default | [v1.2.3 Gateway report](./v1.2.3-default-gateway-report.yaml)    |
 
 ## Reproduce
 
@@ -48,10 +48,10 @@ Instructions on how to reproduce the claimed report(s).
 The table of contents within an implementation's `README.md` should contain one row for each submitted report and include the following columns:
 
 * **Extension Version Tested**: The version of the Kube Agentic Networking specification tested against (e.g., `v0.0.0-dev`). Must correspond to the `gatewayLayerVersion` field in the report.
-* **Profile Tested**: The specific conformance profile tested (e.g., `GatewayLayer`). Must correspond to the `name` of the profile in the `profiles` list within the report.
+* **Profile Tested**: The specific conformance profile tested (e.g., `Gateway`). Must correspond to the `name` of the profile in the `profiles` list within the report.
 * **Implementation Version**: A link to the GitHub/website page for the specific release/commit of the implementation tested. The version value MUST correspond to the `implementation.version` field in the report.
 * **Mode**: The operating mode of the implementation used for the test run (default is `default`). Must correspond to the `mode` field in the report. If a mode other than `default` is used, the "Reproduce" section must explain how to configure it.
-* **Report**: A link to the corresponding report YAML file. Reports MUST be named according to the pattern: `<Implementation Version>-<Mode>-<Profile>-report.yaml` (e.g., `v1.2.3-default-gatewaylayer-report.yaml`).
+* **Report**: A link to the corresponding report YAML file. Reports MUST be named according to the pattern: `<Implementation Version>-<Mode>-<Profile>-report.yaml` (e.g., `v1.2.3-default-gateway-report.yaml`).
 
 ### Reproduce Section (within Implementation README)
 
@@ -76,14 +76,14 @@ To be accepted, submitted conformance reports must comply with the following rul
 3. **Mode:** The `mode` field indicates the implementation's operating mode during the test run.
 4. **Test Profile & Result:**
    * The report MUST contain exactly one profile result under the `profiles` list for the specific conformance category being submitted.
-   * The profile's `name` MUST match the conformance category (e.g., `GatewayLayer`).
+   * The profile's `name` MUST match the conformance category (e.g., `Gateway`).
    * The profile's `result` field MUST be `success`. A `success` result indicates that **all** tests defined within the conformance suite for that specific profile passed.
 
 ## Submission Process
 
 Conformance reports demonstrating a `success` result should be submitted via Pull Request directly to this repository (`kubernetes-sigs/kube-agentic-networking`).
 
-1. Create a new folder structure under `/conformance/reports/<extension-version>/<profile-name>/` named after your implementation (e.g., `/conformance/reports/v0.0.0-dev/gatewaylayer/my-implementation/`).
+1. Create a new folder structure under `/conformance/reports/<extension-version>/<profile-name>/` named after your implementation (e.g., `/conformance/reports/v0.0.0-dev/gateway/my-implementation/`).
 2. Add your implementation's `README.md` to this folder, following the structure described above.
 3. Add your generated conformance report YAML file(s) to this folder, ensuring they follow the naming convention `<Implementation Version>-<Mode>-<Profile>-report.yaml`.
 4. Submit the Pull Request.
