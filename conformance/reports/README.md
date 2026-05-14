@@ -8,7 +8,7 @@ This folder stores conformance reports organized first by the version of the Kub
 
 ```
 |-- conformance/reports
-|   |-- v1alpha1  # Specification bundle version
+|   |-- v0.0.0-dev  # Specification bundle version
 |   |   |-- gatewaylayer  # Conformance profile category
 |   |   |   |-- my-agentic-gateway
 |   |   |   |   |-- README.md
@@ -20,7 +20,7 @@ This folder stores conformance reports organized first by the version of the Kub
 
 ## Implementation Submissions
 
-Each implementation conformant with a specific profile of a specific version of Kube Agentic Networking should have its own folder within the corresponding version and profile directory (e.g., `/conformance/reports/v1alpha1/gatewaylayer/my-implementation/`).
+Each implementation conformant with a specific profile of a specific version of Kube Agentic Networking should have its own folder within the corresponding version and profile directory (e.g., `/conformance/reports/v0.0.0-dev/gatewaylayer/my-implementation/`).
 
 The implementation is the owner of its folder and is responsible for:
 
@@ -36,7 +36,7 @@ General information about the My/Implementation project.
 
 | Extension Version Tested | Profile Tested | Implementation Version | Mode    | Report                                                                     |
 |--------------------------|----------------|------------------------|---------|----------------------------------------------------------------------------|
-| v1alpha1                 | GatewayLayer   | v1.2.3                 | default | [v1.2.3 GatewayLayer report](./v1.2.3-default-gatewaylayer-report.yaml)    |
+| v0.0.0-dev               | GatewayLayer   | v1.2.3                 | default | [v1.2.3 GatewayLayer report](./v1.2.3-default-gatewaylayer-report.yaml)    |
 
 ## Reproduce
 
@@ -47,7 +47,7 @@ Instructions on how to reproduce the claimed report(s).
 
 The table of contents within an implementation's `README.md` should contain one row for each submitted report and include the following columns:
 
-* **Extension Version Tested**: The version of the Kube Agentic Networking specification tested against (e.g., `v1alpha1`). Must correspond to the `gatewayLayerVersion` field in the report.
+* **Extension Version Tested**: The version of the Kube Agentic Networking specification tested against (e.g., `v0.0.0-dev`). Must correspond to the `gatewayLayerVersion` field in the report.
 * **Profile Tested**: The specific conformance profile tested (e.g., `GatewayLayer`). Must correspond to the `name` of the profile in the `profiles` list within the report.
 * **Implementation Version**: A link to the GitHub/website page for the specific release/commit of the implementation tested. The version value MUST correspond to the `implementation.version` field in the report.
 * **Mode**: The operating mode of the implementation used for the test run (default is `default`). Must correspond to the `mode` field in the report. If a mode other than `default` is used, the "Reproduce" section must explain how to configure it.
@@ -72,7 +72,7 @@ To be accepted, submitted conformance reports must comply with the following rul
    * `version`: A specific, reproducible snapshot of the implementation (e.g., tag, commit hash, release version). Branch names are not acceptable.
    * `contact`: A list of contact points (GitHub handles like `@maintainer`, team handles like `@org/team`, email addresses, or support URLs like an issue tracker).
 2. **Extension Versioning:** The report MUST include:
-   * `gatewayLayerVersion`: The specific version of the Kube Agentic Networking specification tested against (e.g., `v1alpha1`).
+   * `gatewayLayerVersion`: The specific version of the Kube Agentic Networking specification tested against (e.g., `v0.0.0-dev`).
 3. **Mode:** The `mode` field indicates the implementation's operating mode during the test run.
 4. **Test Profile & Result:**
    * The report MUST contain exactly one profile result under the `profiles` list for the specific conformance category being submitted.
@@ -83,7 +83,7 @@ To be accepted, submitted conformance reports must comply with the following rul
 
 Conformance reports demonstrating a `success` result should be submitted via Pull Request directly to this repository (`kubernetes-sigs/kube-agentic-networking`).
 
-1. Create a new folder structure under `/conformance/reports/<extension-version>/<profile-name>/` named after your implementation (e.g., `/conformance/reports/v1alpha1/gatewaylayer/my-implementation/`).
+1. Create a new folder structure under `/conformance/reports/<extension-version>/<profile-name>/` named after your implementation (e.g., `/conformance/reports/v0.0.0-dev/gatewaylayer/my-implementation/`).
 2. Add your implementation's `README.md` to this folder, following the structure described above.
 3. Add your generated conformance report YAML file(s) to this folder, ensuring they follow the naming convention `<Implementation Version>-<Mode>-<Profile>-report.yaml`.
 4. Submit the Pull Request.
