@@ -84,11 +84,13 @@ func main() {
 			obj.Annotations["agentic.networking.x-k8s.io/bundle-version"] = version.BundleVersion
 		}
 
-		// Clean up metadata properties from schema and fix date-time fields
+		// Fix top level metadata to be compliant with K8s structural schema
+		crd.FixTopLevelMetadata(obj)
+
+		// Fix date-time fields in schema
 		for i := range obj.Spec.Versions {
 			v := &obj.Spec.Versions[i]
 			if v.Schema != nil && v.Schema.OpenAPIV3Schema != nil {
-				delete(v.Schema.OpenAPIV3Schema.Properties, "metadata")
 				fixDateTime(v.Schema.OpenAPIV3Schema)
 			}
 		}
