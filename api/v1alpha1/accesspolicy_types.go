@@ -294,7 +294,6 @@ type AccessPolicyStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
-// +kubebuilder:metadata:annotations="agentic.networking.x-k8s.io/bundle-version=v0.0.0-dev"
 
 // XAccessPolicy is the Schema for the accesspolicies API.
 type XAccessPolicy struct {
