@@ -45,7 +45,7 @@ import (
 	"sigs.k8s.io/kube-agentic-networking/version"
 )
 
-const GatewayLayerProfileName confsuite.ConformanceProfileName = "GatewayLayer"
+const GatewayLayerProfileName confsuite.ConformanceProfileName = "Gateway"
 
 var GatewayLayerProfile = confsuite.ConformanceProfile{
 	Name:         GatewayLayerProfileName,
